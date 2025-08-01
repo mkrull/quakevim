@@ -13,6 +13,13 @@ wk.add {
         desc = "Find files",
     },
     {
+        "<leader>F",
+        function()
+            require("conform").format { async = true, lsp_format = "fallback" }
+        end,
+        desc = "Format buffer",
+    },
+    {
         "<leader>B",
         function()
             require("telescope.builtin").buffers()
