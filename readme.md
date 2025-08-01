@@ -19,6 +19,10 @@ And a floating one:
 
 ![half-life](images/quakevim-float.png)
 
+And with light background:
+
+![light-bg](images/quakevim-light.png)
+
 ## Installation
 
 Install using `git`:
