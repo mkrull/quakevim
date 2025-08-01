@@ -8,5 +8,6 @@ return {
 
     -- language extensions
     "lang/go",
+    "lang/markdown",
     "lang/yaml",
 }
