@@ -107,6 +107,17 @@ function M.flatten_plugins(tbl)
     return result
 end
 
+function M.get_extensions_file()
+    local in_home = vim.env.HOME .. "/.quakevim.lua"
+    if vim.fn.filereadable(in_home) == 1 then
+        return in_home
+    end
+
+    -- in case no .quakevim.lua is found in $HOME use the default in the neovim
+    -- config home
+    return vim.fn.stdpath "config" .. "/extensions.lua"
+end
+
 function M.require()
     for _, value in ipairs(M.plugins) do
         local plugin_path = "extensions." .. string.gsub(value, "/", ".")
@@ -116,7 +127,7 @@ end
 
 function M.load_specs(spec)
     -- loading list of extensions and inserting them into the spec
-    local ok, plugins = pcall(dofile, vim.fn.stdpath "config" .. "/extensions.lua")
+    local ok, plugins = pcall(dofile, M.get_extensions_file())
     M.plugins = plugins
     if ok then
         for _, value in ipairs(plugins) do

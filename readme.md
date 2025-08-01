@@ -3,11 +3,30 @@
 This is quakevim, a neovim distribution taking some inspiration from Doom Emacs
 with focus on being modular with a few core plugins and sane defaults.
 
+![screenshot](images/quakevim.png)
+
+## Installation
+
+Install using `git`:
+
+    git clone --depth 1 https://github.com/mkrull/quakevim ~/.config/nvim/
+
+Run:
+
+    nvim
+
+On first start [lazydev.nvim](https://github.com/folke/lazydev.nvim) will
+install the core plugins and default extensions.
+
+Run `:MakeConfig` to create a local config that is not managed from the checked
+out repository. The command copies the default extensions file to
+`$HOME/.quakevim.lua` and you can enable and disable extensions as needed using
+`:EditConfig`.
+
 ## Core Plugins
 
 The core plugins provide the core functionality other plugins and extensions
 are able to rely on. The are enabled by default.
-
 Quakevim makes heavy use
 [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) for search,
 file selection, and more generally it improves discoverability of many parts of
@@ -38,4 +57,3 @@ They are enabled and disabled in the neovim config dir's top level
 `spec.lua`, an `init.lua`, and a `mappings.lua`. The extension gets
 automatically installed and required at startup once it is listed in the top
 level `extensions.lua` file.
-

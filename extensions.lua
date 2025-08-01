@@ -7,7 +7,7 @@ return {
     "ui", -- ui goodness, some might say clutter
 
     -- language extensions
-    "lang/go",
+    -- "lang/go",
     "lang/markdown",
-    "lang/yaml",
+    -- "lang/yaml",
 }
