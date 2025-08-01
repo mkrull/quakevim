@@ -3,6 +3,12 @@
 This is quakevim, a neovim distribution taking some inspiration from Doom Emacs
 with focus on being modular with a few core plugins and sane defaults.
 
+    Doom laid the foundation, but Quake perfected the formula with pure,
+    unadulterated speed. Where Doom plodded, Quake soared — a ballet of rockets
+    and lightning guns performed at breakneck velocity. It’s not just a faster
+    game; it’s a different dimension of movement altogether, where mastery of
+    momentum separates the quick from the dead.
+
 ![screenshot](images/quakevim.png)
 
 Obviously with drop down terminal:
