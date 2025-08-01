@@ -3,4 +3,5 @@ return {
     "lsp",
     "neogit",
     "terminal",
+    "ui",
 }
