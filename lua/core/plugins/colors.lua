@@ -7,6 +7,11 @@ return {
             day_brightness = 0.15, -- high contrast but colorful
 
             on_highlights = function(highlights, colors)
+                -- blue, less bright float borders
+                highlights.FloatBorder = {
+                    fg = colors.blue0,
+                }
+
                 -- more visible window borders
                 highlights.WinSeparator = {
                     fg = colors.blue0,
