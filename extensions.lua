@@ -5,4 +5,6 @@ return {
     "terminal",
     "ui",
     "trouble",
+
+    "lang/go",
 }
