@@ -31,6 +31,34 @@ if ok then
             border = require("util").bottom_border,
         },
     }
+
+    local half_life = require("toggleterm.terminal").Terminal:new {
+        open_mapping = [[<C-X>]],
+        direction = "float",
+        float_opts = {
+            height = function()
+                local third = math.ceil(vim.o.lines / 3)
+                if third < 10 then
+                    third = 10
+                end
+
+                return third
+            end,
+            width = function()
+                local half = math.ceil(vim.o.columns / 2)
+                if half < 10 then
+                    half = 10
+                end
+
+                return half
+            end,
+            row = 3,
+            col = 6,
+            winblend = 15,
+            border = require("util").border,
+        },
+    }
+
     wk.add {
         { "<leader>t", group = "Terminal", icon = { icon = "" } },
         {
@@ -39,6 +67,13 @@ if ok then
                 float:toggle()
             end,
             desc = "Toggle terminal",
+        },
+        {
+            "~",
+            function()
+                half_life:toggle()
+            end,
+            desc = "Toggle terminal window",
         },
         {
             "<C-x>",

@@ -15,6 +15,10 @@ Obviously with drop down terminal:
 
 ![dropdown](images/quakevim-dropdown.png)
 
+And a floating one:
+
+![half-life](images/quakevim-float.png)
+
 ## Installation
 
 Install using `git`:
