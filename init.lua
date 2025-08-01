@@ -47,4 +47,5 @@ vim.cmd [[nnoremap q <Nop>]]
 require "core.colors"
 require "core.mappings"
 
+-- loading configured extensions
 loader.require()

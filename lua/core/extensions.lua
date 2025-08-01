@@ -10,7 +10,6 @@ function M.make_extension(name)
     local spec_file = ext_dir .. "/spec.lua"
 
     vim.fn.mkdir(ext_dir, "p")
-    vim.fn.mkdir(spec_dir, "p")
 
     local mappings_handle = io.open(mappings_file, "w")
     if mappings_handle then

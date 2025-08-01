@@ -4,4 +4,5 @@ return {
     "neogit",
     "terminal",
     "ui",
+    "trouble",
 }
