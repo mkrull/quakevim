@@ -5,6 +5,10 @@ with focus on being modular with a few core plugins and sane defaults.
 
 ![screenshot](images/quakevim.png)
 
+Obviously with drop down terminal:
+
+![dropdown](images/quakevim-dropdown.png)
+
 ## Installation
 
 Install using `git`:
