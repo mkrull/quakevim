@@ -7,4 +7,5 @@ return {
     "trouble",
 
     "lang/go",
+    "lang/yaml",
 }

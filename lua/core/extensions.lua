@@ -4,6 +4,7 @@ function M.make_extension(name)
     local config_dir = vim.fn.stdpath "config"
 
     local path_name = name:gsub("%.", "/")
+    local module_name = name:gsub("/", "%.")
     local ext_dir = config_dir .. "/lua/extensions/" .. path_name
     local mappings_file = ext_dir .. "/mappings.lua"
     local init_file = ext_dir .. "/init.lua"
@@ -22,7 +23,7 @@ if ok then
     -- }
 end
 ]],
-            name
+            module_name
         )
         mappings_handle:write(mappings_content)
         mappings_handle:close()
@@ -34,7 +35,7 @@ end
         [[
 require "extensions.%s.mappings"
 ]],
-        name
+        module_name
     )
 
     local init_handle = io.open(init_file, "w")
@@ -53,7 +54,7 @@ require "extensions.%s.mappings"
         error "Failed to create spec.lua file"
     end
 
-    print("Created extension '" .. name .. "' at " .. ext_dir)
+    print("Created extension '" .. module_name .. "' at " .. ext_dir)
 end
 
 vim.api.nvim_create_user_command("MakeExtension", function(opts)

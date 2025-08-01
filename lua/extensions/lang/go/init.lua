@@ -4,6 +4,14 @@ vim.g.go_def_mapping_enabled = false
 
 require "extensions.lang.go.lint"
 
+local ok, mason = pcall(require, "mason-registry")
+if ok then
+    local p = mason.get_package "gopls"
+    if not p:is_installed() then
+        p:install()
+    end
+end
+
 local ok, lsp = pcall(require, "lspconfig")
 if ok then
     local capabilities = require("blink.cmp").get_lsp_capabilities()
