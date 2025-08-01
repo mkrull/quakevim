@@ -3,25 +3,25 @@ local M = {}
 -- order as used by telescope
 M.borderchars = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" }
 M.border = {
-    { "🭽", "FloatBorder" }, -- top left
-    { "▔", "FloatBorder" }, -- top
-    { "🭾", "FloatBorder" }, -- top right
-    { "▕", "FloatBorder" }, -- right
-    { "🭿", "FloatBorder" }, -- bottom right
-    { "▁", "FloatBorder" }, -- bottom
-    { "🭼", "FloatBorder" }, -- bottom left
-    { "▏", "FloatBorder" }, -- left
+    { "🭽", "WinSeparator" }, -- top left
+    { "▔", "WinSeparator" }, -- top
+    { "🭾", "WinSeparator" }, -- top right
+    { "▕", "WinSeparator" }, -- right
+    { "🭿", "WinSeparator" }, -- bottom right
+    { "▁", "WinSeparator" }, -- bottom
+    { "🭼", "WinSeparator" }, -- bottom left
+    { "▏", "WinSeparator" }, -- left
 }
 
 M.bottom_border = {
-    { " ", "FloatBorder" }, -- top left
-    { " ", "FloatBorder" }, -- top
-    { " ", "FloatBorder" }, -- top right
-    { " ", "FloatBorder" }, -- right
-    { "▁", "FloatBorder" }, -- bottom right
-    { "▁", "FloatBorder" }, -- bottom
-    { "▁", "FloatBorder" }, -- bottom left
-    { " ", "FloatBorder" }, -- left
+    { " ", "WinSeparator" }, -- top left
+    { " ", "WinSeparator" }, -- top
+    { " ", "WinSeparator" }, -- top right
+    { " ", "WinSeparator" }, -- right
+    { "▁", "WinSeparator" }, -- bottom right
+    { "▁", "WinSeparator" }, -- bottom
+    { "▁", "WinSeparator" }, -- bottom left
+    { " ", "WinSeparator" }, -- left
 }
 
 M.install = function(name)
