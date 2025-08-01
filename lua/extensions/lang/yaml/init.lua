@@ -1,12 +1,6 @@
 require "extensions.lang.yaml.mappings"
 
-local ok, mason = pcall(require, "mason-registry")
-if ok then
-    local p = mason.get_package "yaml-language-server"
-    if not p:is_installed() then
-        p:install()
-    end
-end
+require("util").install "yaml-language-server"
 
 local ok, lsp = pcall(require, "lspconfig")
 if ok then
