@@ -10,6 +10,7 @@ local spec = {
 
 -- loading list of extensions and inserting them into the spec
 spec = loader.load_specs(spec)
+local config = loader.load_config()
 
 -- installing lazy.nvim in case it doesn't already exist
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
@@ -44,7 +45,7 @@ vim.cmd [[nnoremap q <Nop>]]
 
 -- those packages depend on lazy installed plugins, e.g. which-key and
 -- colorschemes
-require "core.colors"
+require("core.colors").use(config.colorscheme)
 require "core.mappings"
 require "core.lua"
 

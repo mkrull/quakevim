@@ -1,25 +1,41 @@
-local kanagawa = "kanagawa-paper"
-local ok, _ = pcall(require, kanagawa)
-if not ok then
-    return {}
+M = {}
+
+M.loaded = "default"
+
+M.use = function(scheme)
+    print("want to load " .. scheme)
+    if scheme then
+        vim.cmd.colorscheme(scheme)
+        return
+    end
+
+    vim.cmd.colorscheme(M.loaded)
 end
 
-local catppuccin = "catppuccin"
-local ok, _ = pcall(require, catppuccin)
-if not ok then
-    return {}
+-- load all colorschemes and use the last one that successfully loads as
+-- default
+local kanagawa = "kanagawa-paper"
+local ok, _ = pcall(require, kanagawa)
+if ok then
+    M.loaded = kanagawa
 end
 
 local nordic = "nordic"
 local ok, _ = pcall(require, nordic)
-if not ok then
-    return {}
+if ok then
+    M.loaded = "nordic"
+end
+
+local catppuccin = "catppuccin"
+local ok, _ = pcall(require, catppuccin)
+if ok then
+    M.loaded = catppuccin
 end
 
 local tokyonight = "tokyonight"
 local ok, _ = pcall(require, tokyonight)
-if not ok then
-    return {}
+if ok then
+    M.loaded = tokyonight .. "-storm"
 end
 
-vim.cmd.colorscheme "tokyonight-storm"
+return M
