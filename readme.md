@@ -36,7 +36,12 @@ Run:
 On first start [lazydev.nvim](https://github.com/folke/lazydev.nvim) will
 install the core plugins and default extensions.
 
-Run `:MakeConfig` to create a local config that is not managed from the checked
+## Configuration
+
+Quakevim has a high level configuration file that can be accessed using
+`:EditConfig`.
+
+Run `:MakeConfig` to create a local config that is not managed in the checked
 out repository. The command copies the default extensions file to
 `$HOME/.quakevim.lua` and you can enable and disable extensions as needed using
 `:EditConfig`.

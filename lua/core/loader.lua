@@ -125,12 +125,21 @@ function M.require()
     end
 end
 
+function M.load_config()
+    local ok, config = pcall(dofile, M.get_extensions_file())
+    if ok then
+        return config.config or {}
+    end
+
+    return {}
+end
+
 function M.load_specs(spec)
     -- loading list of extensions and inserting them into the spec
-    local ok, plugins = pcall(dofile, M.get_extensions_file())
-    M.plugins = plugins
+    local ok, config = pcall(dofile, M.get_extensions_file())
+    M.plugins = config.extensions
     if ok then
-        for _, value in ipairs(plugins) do
+        for _, value in ipairs(M.plugins) do
             local spec_path = vim.fn.stdpath "config" .. "/lua/extensions/" .. value .. "/spec.lua"
             local ok, loaded = pcall(loadfile, spec_path)
             if ok then
