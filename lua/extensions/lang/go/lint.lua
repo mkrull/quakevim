@@ -15,7 +15,6 @@ local lint = function()
                 table.insert(revive.args, config_file)
             end
 
-            print(vim.inspect(revive))
             linter.linters.revive = revive
             linter.linters_by_ft.go = { "revive" }
         else
