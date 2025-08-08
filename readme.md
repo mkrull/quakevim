@@ -1,7 +1,7 @@
 # Quakevim
 
-This is quakevim, a neovim distribution taking some inspiration from Doom Emacs
-with focus on being modular with a few core plugins and sane defaults.
+This is quakevim, a neovim distribution taking inspiration from Doom Emacs
+with a focus on being modular with a few core plugins and sane defaults.
 
     Doom laid the foundation, but Quake perfected the formula with pure,
     unadulterated speed. Where Doom plodded, Quake soared — a ballet of rockets
@@ -33,7 +33,7 @@ Run:
 
     nvim
 
-On first start [lazydev.nvim](https://github.com/folke/lazydev.nvim) will
+On first start [lazy.nvim](https://github.com/folke/lazy.nvim) will
 install the core plugins and default extensions.
 
 ## Configuration
@@ -73,8 +73,8 @@ return {
 ## Core Plugins
 
 The core plugins provide the core functionality other plugins and extensions
-are able to rely on. The are enabled by default.
-Quakevim makes heavy use
+are able to rely on. They are enabled by default.
+Quakevim makes heavy use of
 [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) for search,
 file selection, and more generally it improves discoverability of many parts of
 neovim, like help, highlights, registers, and more.
@@ -84,7 +84,7 @@ and is used to add extension mappings.
 
 Autocomplete is done using [blink.cmp](https://github.com/saghen/blink.cmp).
 
-Autoformatting is done using [conform.nvim](https://github.com/stevearc/conform.nvim) unless configured otherwise for
+Autoformatting is done using [conform.nvim](https://github.com/stevearc/conform.nvim) unless configured otherwise, for
 example via lsp integration.
 
 To enable easy changes to Quakevim itself as well as extension setup and
