@@ -3,7 +3,6 @@ M = {}
 M.loaded = "default"
 
 M.use = function(scheme)
-    print("want to load " .. scheme)
     if scheme then
         vim.cmd.colorscheme(scheme)
         return

@@ -9,3 +9,9 @@ if ok then
         capabilities = capabilities,
     }
 end
+
+-- default to yamlfmt for autoformatting yaml
+local ok, conform = pcall(require, "conform")
+if ok then
+    conform.formatters_by_ft["yaml"] = { "yamlfmt" }
+end
