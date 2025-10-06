@@ -2,13 +2,12 @@ require "extensions.lang.yaml.mappings"
 
 require("util").install "yaml-language-server"
 
-local ok, lsp = pcall(require, "lspconfig")
-if ok then
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
-    lsp.yamlls.setup {
-        capabilities = capabilities,
-    }
-end
+local capabilities = require("blink.cmp").get_lsp_capabilities()
+vim.lsp.config.yamlls = {
+    capabilities = capabilities,
+    cmd = { "yaml-language-server", "--stdio" },
+    filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
+}
 
 -- default to yamlfmt for autoformatting yaml
 local ok, conform = pcall(require, "conform")

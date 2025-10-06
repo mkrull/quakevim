@@ -136,9 +136,10 @@ return {
             -- :Mason
 
             -- Setup lua lsp here, leave all other lsp setup to the language extensions
-            require("lspconfig").lua_ls.setup {
+            vim.lsp.config.lua_ls = {
                 capabilities = capabilities,
-
+                cmd = { "lua-language-server" },
+                filetypes = { "lua" },
                 settings = {
                     Lua = {
                         completion = {

@@ -1,12 +1,11 @@
 require "extensions.lang.gleam.mappings"
 
-local ok, lsp = pcall(require, "lspconfig")
-if ok then
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
-    lsp.gleam.setup {
-        capabilities = capabilities,
-    }
-end
+local capabilities = require("blink.cmp").get_lsp_capabilities()
+vim.lsp.config.gleam = {
+    capabilities = capabilities,
+    cmd = { "gleam", "lsp" },
+    filetypes = { "gleam" },
+}
 
 local gleamgroup = vim.api.nvim_create_augroup("GleamBufferMappings", { clear = true })
 

@@ -6,26 +6,25 @@ require "extensions.lang.go.lint"
 
 require("util").install "gopls"
 
-local ok, lsp = pcall(require, "lspconfig")
-if ok then
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
-    lsp.gopls.setup {
-        capabilities = capabilities,
-        settings = {
-            gopls = {
-                hints = {
-                    assignVariableTypes = true,
-                    compositeLiteralFields = true,
-                    compositeLiteralTypes = true,
-                    constantValues = true,
-                    functionTypeParameters = true,
-                    parameterNames = true,
-                    rangeVariableTypes = true,
-                },
+local capabilities = require("blink.cmp").get_lsp_capabilities()
+vim.lsp.config.gopls = {
+    capabilities = capabilities,
+    cmd = { "gopls" },
+    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    settings = {
+        gopls = {
+            hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
             },
         },
-    }
-end
+    },
+}
 
 -- disable calling :GoDoc and keep lsp hover info mapped to K
 vim.g.go_doc_keywordprg_enabled = 0
