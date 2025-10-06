@@ -6,6 +6,7 @@ vim.lsp.config.gleam = {
     cmd = { "gleam", "lsp" },
     filetypes = { "gleam" },
 }
+vim.lsp.enable "gleam"
 
 local gleamgroup = vim.api.nvim_create_augroup("GleamBufferMappings", { clear = true })
 

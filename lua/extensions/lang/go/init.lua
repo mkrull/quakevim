@@ -25,6 +25,7 @@ vim.lsp.config.gopls = {
         },
     },
 }
+vim.lsp.enable "gopls"
 
 -- disable calling :GoDoc and keep lsp hover info mapped to K
 vim.g.go_doc_keywordprg_enabled = 0
