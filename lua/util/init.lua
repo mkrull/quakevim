@@ -27,9 +27,11 @@ M.bottom_border = {
 M.install = function(name)
     local ok, mason = pcall(require, "mason-registry")
     if ok then
-        local p = mason.get_package(name)
-        if not p:is_installed() then
-            p:install()
+        if not mason.is_installed(name) then
+            mason.refresh(function()
+                local p = mason.get_package(name)
+                p:install()
+            end)
         end
     end
 end
