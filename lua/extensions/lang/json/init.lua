@@ -1,5 +1,3 @@
-require "extensions.lang.json.mappings"
-
 require("util").install "json-lsp"
 
 local capabilities = require("blink.cmp").get_lsp_capabilities()

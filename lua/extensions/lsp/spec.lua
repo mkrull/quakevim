@@ -127,31 +127,6 @@ return {
                     prefix = "",
                 },
             }
-
-            -- LSP servers and clients are able to communicate to each other what features they support.
-            --  By default, Neovim doesn't support everything that is in the LSP specification.
-            --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
-            --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
-            local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-            -- Ensure the servers and tools above are installed using mason directly
-            -- :Mason
-
-            -- Setup lua lsp here, leave all other lsp setup to the language extensions
-            vim.lsp.config.lua_ls = {
-                capabilities = capabilities,
-                cmd = { "lua-language-server" },
-                filetypes = { "lua" },
-                settings = {
-                    Lua = {
-                        completion = {
-                            callSnippet = "Replace",
-                        },
-                        -- Ignore Lua_LS's noisy `missing-fields` warnings
-                        diagnostics = { disable = { "missing-fields" } },
-                    },
-                },
-            }
         end,
     },
 }

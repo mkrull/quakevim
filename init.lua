@@ -4,13 +4,14 @@ require "core.save"
 require "core.extensions"
 
 local loader = require "core.loader"
+local config = loader.load_config()
+
 local spec = {
     { import = "core/plugins" },
 }
 
 -- loading list of extensions and inserting them into the spec
 spec = loader.load_specs(spec)
-local config = loader.load_config()
 
 -- installing lazy.nvim in case it doesn't already exist
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
@@ -35,7 +36,7 @@ require("lazy").setup {
         enabled = false,
         notify = false,
     },
-    spec = loader.flatten_plugins(spec),
+    spec = spec,
 }
 
 -- remap recording to Q as q is used in too many places to quit and I keep
@@ -47,7 +48,6 @@ vim.cmd [[nnoremap q <Nop>]]
 -- colorschemes
 require("core.colors").use(config.colorscheme)
 require "core.mappings"
-require "core.lua"
 
 -- loading configured extensions
 loader.require()

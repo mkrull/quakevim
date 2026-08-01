@@ -1,5 +1,3 @@
-require "extensions.lang.yaml.mappings"
-
 require("util").install "yaml-language-server"
 
 local capabilities = require("blink.cmp").get_lsp_capabilities()

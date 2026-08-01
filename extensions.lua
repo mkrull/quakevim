@@ -13,6 +13,7 @@ return {
         -- language extensions
         -- "lang/gleam",
         -- "lang/go", -- limbo, but compiled
+        "lang/lua",
         "lang/markdown",
         -- "lang/yaml",
     },
