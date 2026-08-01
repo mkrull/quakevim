@@ -26,7 +26,7 @@ function M.toggle_clean()
     }
 
     toggle_indent_scope()
-    require("barbecue.ui").toggle()
+    require("dropbar.api").toggle()
 
     vim.o.signcolumn = M.ui_state.signs and "yes" or "no"
 

@@ -1,13 +1,11 @@
 return {
     {
-        "utilyre/barbecue.nvim",
-        name = "barbecue",
-        version = false,
+        "Bekaboo/dropbar.nvim",
         lazy = true,
         event = { "BufReadPost", "BufNewFile" },
         dependencies = {
-            "SmiteshP/nvim-navic",
-            "nvim-tree/nvim-web-devicons", -- optional dependency
+            "nvim-telescope/telescope-fzf-native.nvim",
+            "nvim-tree/nvim-web-devicons",
         },
         opts = {},
     },
