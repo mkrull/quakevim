@@ -69,7 +69,5 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         -- remove tab listchar for Go as that is default for indentation
         vim.opt_local.listchars:append { tab = "  " }
-        local bufnr = vim.api.nvim_get_current_buf()
-        require("extensions.lsp.mappings").add_to_buffer(bufnr)
     end,
 })

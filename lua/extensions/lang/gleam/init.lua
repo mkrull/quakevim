@@ -7,14 +7,3 @@ vim.lsp.config.gleam = {
     filetypes = { "gleam" },
 }
 vim.lsp.enable "gleam"
-
-local gleamgroup = vim.api.nvim_create_augroup("GleamBufferMappings", { clear = true })
-
-vim.api.nvim_create_autocmd("FileType", {
-    group = gleamgroup,
-    pattern = "gleam",
-    callback = function()
-        local bufnr = vim.api.nvim_get_current_buf()
-        require("extensions.lsp.mappings").add_to_buffer(bufnr)
-    end,
-})

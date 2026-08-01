@@ -10,8 +10,10 @@ vim.lsp.config.yamlls = {
 }
 vim.lsp.enable "yamlls"
 
--- default to yamlfmt for autoformatting yaml
-local ok, conform = pcall(require, "conform")
-if ok then
-    conform.formatters_by_ft["yaml"] = { "yamlfmt" }
+-- default to yamlfmt for autoformatting yaml if it is available
+if vim.fn.executable "yamlfmt" == 1 then
+    local ok, conform = pcall(require, "conform")
+    if ok then
+        conform.formatters_by_ft["yaml"] = { "yamlfmt" }
+    end
 end
