@@ -1,15 +1,17 @@
 return {
     {
-        "akinsho/toggleterm.nvim",
-        cmd = { "ToggleTerm", "TermExec" },
+        "folke/snacks.nvim",
         opts = {
-            size = 10,
-            shading_factor = 6,
-            direction = "float",
-            float_opts = {
-                border = require("util").border,
+            terminal = {
+                enabled = true,
+                win = {
+                    wo = {
+                        -- render terminal floats with the same background as
+                        -- other floating windows so the borders blend in
+                        winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+                    },
+                },
             },
         },
     },
 }
-

@@ -1,14 +1,8 @@
-local ok, wk = pcall(require, "which-key")
-if not ok then
-    print "couldn't load which-key"
-    return {}
-end
-
-wk.add {
+require("util").wk_add {
     {
         "<leader><space>",
         function()
-            require("telescope.builtin").find_files()
+            require("snacks").picker.files()
         end,
         desc = "Find files",
     },
@@ -22,14 +16,14 @@ wk.add {
     {
         "<leader>B",
         function()
-            require("telescope.builtin").buffers()
+            require("snacks").picker.buffers()
         end,
         desc = "Find buffers",
     },
     {
         "<leader>H",
         function()
-            require("telescope.builtin").help_tags()
+            require("snacks").picker.help()
         end,
         desc = "Help tags",
         icon = { icon = "󰞋" },
@@ -37,9 +31,9 @@ wk.add {
     {
         "<leader>T",
         function()
-            require("telescope.builtin").builtin()
+            require("snacks").picker.pickers()
         end,
-        desc = "Telescope",
+        desc = "Pickers",
         icon = { icon = "󰭎" },
     },
     {
@@ -62,7 +56,7 @@ wk.add {
     {
         "<leader>ss",
         function()
-            require("telescope.builtin").live_grep()
+            require("snacks").picker.grep()
         end,
         desc = "Search in project",
     },
@@ -79,54 +73,12 @@ wk.add {
     { "<leader>wL", "<C-W>L", desc = "Move right" },
     { "<leader>ws", "<C-W>s", desc = "Split" },
     { "<leader>wv", "<C-W>v", desc = "Vertical split" },
-}
-
-wk.add {
     {
-        {
-            "K",
-            function()
-                vim.lsp.buf.hover { border = require("util").border }
-            end,
-            desc = "Hover info",
-        },
-        {
-            "L",
-            function()
-                vim.diagnostic.open_float()
-            end,
-            desc = "Hover diagnostics",
-        },
-        {
-            "gD",
-            function()
-                vim.cmd "vsplit"
-                vim.lsp.buf.definition()
-            end,
-            desc = "Go to definition of current symbol in vsplit",
-        },
-        {
-            "gS",
-            function()
-                vim.cmd "split"
-                vim.lsp.buf.definition()
-            end,
-            desc = "Go to definition of current symbol in split",
-        },
-        {
-            "gd",
-            function()
-                vim.lsp.buf.definition()
-            end,
-            desc = "Go to definition of current symbol",
-        },
-        {
-            "gF",
-            function()
-                vim.cmd "vsplit"
-                vim.cmd "edit <cfile>"
-            end,
-            desc = "Go to file under cursor in vsplit",
-        },
+        "gF",
+        function()
+            vim.cmd "vsplit"
+            vim.cmd "edit <cfile>"
+        end,
+        desc = "Go to file under cursor in vsplit",
     },
 }

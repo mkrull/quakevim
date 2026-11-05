@@ -1,5 +1,38 @@
 return {
     {
+        "folke/snacks.nvim",
+        opts = {
+            indent = {
+                enabled = true,
+                -- no animated scope, matching the previous mini.indentscope
+                -- setup
+                animate = { enabled = false },
+            },
+        },
+        init = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = {
+                    "help",
+                    "alpha",
+                    "dashboard",
+                    "snacks_picker_list",
+                    "snacks_picker_preview",
+                    "snacks_picker_input",
+                    "Trouble",
+                    "trouble",
+                    "lazy",
+                    "mason",
+                    "notify",
+                    "terminal",
+                    "lazyterm",
+                },
+                callback = function()
+                    vim.b.snacks_indent = false
+                end,
+            })
+        end,
+    },
+    {
         "Bekaboo/dropbar.nvim",
         lazy = true,
         event = { "BufReadPost", "BufNewFile" },
@@ -18,7 +51,6 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         dependencies = {
             "nvim-tree/nvim-web-devicons",
-            "yavorski/lualine-macro-recording.nvim",
         },
         opts = function()
             return {
@@ -40,7 +72,16 @@ return {
                         { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
                     },
                     lualine_x = {
-                        { "macro_recording", "%S" },
+                        {
+                            function()
+                                local reg = vim.fn.reg_recording()
+                                if reg == "" then
+                                    return ""
+                                end
+                                return " @" .. reg
+                            end,
+                            color = { fg = "#ff9e64" },
+                        },
                         {
                             "diff",
                         },
@@ -59,46 +100,8 @@ return {
                         end,
                     },
                 },
-                extensions = { "neo-tree", "lazy" },
+                extensions = { "lazy" },
             }
-        end,
-    },
-    {
-        "echasnovski/mini.indentscope",
-        version = "*",
-        opts = {
-            draw = {
-                -- Delay (in ms) between event and start of drawing scope indicator
-                delay = 30,
-                -- disable animations
-                animation = function()
-                    return 0
-                end,
-            },
-            symbol = "│",
-            options = {
-                try_as_border = true,
-            },
-        },
-        init = function()
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = {
-                    "help",
-                    "alpha",
-                    "dashboard",
-                    "neo-tree",
-                    "Trouble",
-                    "trouble",
-                    "lazy",
-                    "mason",
-                    "notify",
-                    "toggleterm",
-                    "lazyterm",
-                },
-                callback = function()
-                    vim.b.miniindentscope_disable = true
-                end,
-            })
         end,
     },
 }

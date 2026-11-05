@@ -44,7 +44,8 @@ Quakevim has a high level configuration file that can be accessed using
 Run `:MakeConfig` to create a local config that is not managed in the checked
 out repository. The command copies the default extensions file to
 `$HOME/.quakevim.lua` and you can enable and disable extensions as needed using
-`:EditConfig`.
+`:EditConfig`. The local config is authoritative: if it exists it fully
+replaces the default `extensions.lua`.
 
 The default configuration looks something like this:
 
@@ -74,8 +75,8 @@ return {
 
 The core plugins provide the core functionality other plugins and extensions
 are able to rely on. They are enabled by default.
-Quakevim makes heavy use of
-[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) for search,
+Quakevim makes heavy use of the
+[snacks.nvim](https://github.com/folke/snacks.nvim) picker for search,
 file selection, and more generally it improves discoverability of many parts of
 neovim, like help, highlights, registers, and more.
 
@@ -87,9 +88,16 @@ Autocomplete is done using [blink.cmp](https://github.com/saghen/blink.cmp).
 Autoformatting is done using [conform.nvim](https://github.com/stevearc/conform.nvim) unless configured otherwise, for
 example via lsp integration.
 
-To enable easy changes to Quakevim itself as well as extension setup and
-development [stylua-nvim](https://github.com/ckipp01/stylua-nvim) and
-[lazydev.nvim](https://github.com/folke/lazydev.nvim) are set up by default.
+Lua files are formatted with [stylua](https://github.com/JohnnyMorganz/StyLua)
+through [conform.nvim](https://github.com/stevearc/conform.nvim), picking up the
+`stylua.toml` in this repository. To enable easy changes to Quakevim itself as
+well as extension setup and development
+[lazydev.nvim](https://github.com/folke/lazydev.nvim) is set up by default.
+
+Run `:checkhealth quakevim` to validate your configuration: it checks that the
+config files parse, that all enabled extensions exist and that language
+tooling (mason binaries, treesitter parsers) for the enabled language
+extensions is installed.
 
 ## Extensions
 

@@ -8,6 +8,11 @@ vim.lsp.config.yamlls = {
 }
 vim.lsp.enable "yamlls"
 
+local ok, ts = pcall(require, "nvim-treesitter")
+if ok then
+    ts.install { "yaml" }
+end
+
 -- default to yamlfmt for autoformatting yaml if it is available
 if vim.fn.executable "yamlfmt" == 1 then
     local ok, conform = pcall(require, "conform")

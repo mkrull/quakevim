@@ -1,8 +1,11 @@
--- disable vim-go mappings, they get set either via lsp mappings or in
--- mappings.lua
-vim.g.go_def_mapping_enabled = false
-
 require "extensions.lang.go.lint"
+
+-- vim-go used to provide Go syntax highlighting; install the parsers for the
+-- native treesitter setup instead
+local ok, ts = pcall(require, "nvim-treesitter")
+if ok then
+    ts.install { "go", "gomod", "gowork" }
+end
 
 require("util").install "gopls"
 
@@ -26,9 +29,6 @@ vim.lsp.config.gopls = {
     },
 }
 vim.lsp.enable "gopls"
-
--- disable calling :GoDoc and keep lsp hover info mapped to K
-vim.g.go_doc_keywordprg_enabled = 0
 
 local function go_formatter()
     local params = vim.lsp.util.make_range_params(0, "utf-8")

@@ -1,11 +1,49 @@
 local M = {}
 
+local util = require "util"
+
+require("util").wk_add {
+    {
+        "K",
+        function()
+            vim.lsp.buf.hover { border = util.border }
+        end,
+        desc = "Hover info",
+    },
+    {
+        "L",
+        function()
+            vim.diagnostic.open_float()
+        end,
+        desc = "Hover diagnostics",
+    },
+    {
+        "gD",
+        function()
+            vim.cmd "vsplit"
+            vim.lsp.buf.definition()
+        end,
+        desc = "Go to definition of current symbol in vsplit",
+    },
+    {
+        "gS",
+        function()
+            vim.cmd "split"
+            vim.lsp.buf.definition()
+        end,
+        desc = "Go to definition of current symbol in split",
+    },
+    {
+        "gd",
+        function()
+            vim.lsp.buf.definition()
+        end,
+        desc = "Go to definition of current symbol",
+    },
+}
+
 function M.add_to_buffer(bufnr)
-    local ok, wk = pcall(require, "which-key")
-    if not ok then
-        return {}
-    end
-    wk.add {
+    require("util").wk_add {
         { "<leader>l", group = "LSP", icon = { icon = "󱉯" }, buffer = bufnr },
         {
             "<leader>lF",
@@ -26,7 +64,7 @@ function M.add_to_buffer(bufnr)
         {
             "<leader>ld",
             function()
-                require("telescope.builtin").diagnostics()
+                require("snacks").picker.diagnostics()
             end,
             desc = "Search diagnostics",
             buffer = bufnr,
@@ -34,7 +72,7 @@ function M.add_to_buffer(bufnr)
         {
             "<leader>li",
             function()
-                require("telescope.builtin").lsp_implementations()
+                require("snacks").picker.lsp_implementations()
             end,
             desc = "Implementations",
             buffer = bufnr,
@@ -50,7 +88,7 @@ function M.add_to_buffer(bufnr)
         {
             "<leader>lr",
             function()
-                require("telescope.builtin").lsp_references()
+                require("snacks").picker.lsp_references()
             end,
             desc = "References",
             buffer = bufnr,

@@ -1,11 +1,5 @@
-local ok, wk = pcall(require, "which-key")
-
-if not ok then
-    return
-end
-
-wk.add {
-    { "<leader>g", group = "Git", icon = { icon = "" } },
+require("util").wk_add {
+    { "<leader>g", group = "Git", icon = { icon = "" } },
     { "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle line blame" },
     {
         "<leader>gj",

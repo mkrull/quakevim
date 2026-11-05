@@ -16,13 +16,10 @@ function M.make_extension(name)
     if mappings_handle then
         local mappings_content = string.format(
             [[
-local ok, wk = pcall(require, "which-key")
-if ok then
-    -- wk.add {
+    require("util").wk_add {
         -- mappings for %s extension
-    -- }
-end
-]],
+    }
+    ]],
             module_name
         )
         mappings_handle:write(mappings_content)

@@ -8,6 +8,13 @@ return {
         lazy = true,
         opts = {
             graph_style = "unicode",
+            mappings = {
+                status = {
+                    -- <C-x> is the quake terminal; neogit would otherwise
+                    -- shadow it with SplitOpen in its status buffer
+                    ["<c-x>"] = false,
+                },
+            },
             signs = {
                 hunk = { "", "" },
                 item = { "", "" },

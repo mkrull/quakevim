@@ -4,7 +4,9 @@ return {
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
-        event = "VeryLazy",
+        -- needs to load eagerly: the mapping modules require it while
+        -- init.lua is still sourcing, which is before VeryLazy fires
+        lazy = false,
         opts = {
             icons = { group = "" },
         },

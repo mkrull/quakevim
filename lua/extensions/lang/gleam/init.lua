@@ -5,3 +5,8 @@ vim.lsp.config.gleam = {
     filetypes = { "gleam" },
 }
 vim.lsp.enable "gleam"
+
+local ok, ts = pcall(require, "nvim-treesitter")
+if ok then
+    ts.install { "gleam" }
+end

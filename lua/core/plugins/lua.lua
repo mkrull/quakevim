@@ -1,5 +1,4 @@
 return {
-    { "ckipp01/stylua-nvim" },
     {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
