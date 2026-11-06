@@ -1,12 +1,7 @@
-local capabilities = require("blink.cmp").get_lsp_capabilities()
-vim.lsp.config.gleam = {
-    capabilities = capabilities,
+require("util").lsp {
+    name = "gleam",
     cmd = { "gleam", "lsp" },
     filetypes = { "gleam" },
 }
-vim.lsp.enable "gleam"
 
-local ok, ts = pcall(require, "nvim-treesitter")
-if ok then
-    ts.install { "gleam" }
-end
+require("util").ts_install { "gleam" }

@@ -1,9 +1,6 @@
-require("util").install "json-lsp"
-
-local capabilities = require("blink.cmp").get_lsp_capabilities()
-vim.lsp.config.jsonls = {
-    capabilities = capabilities,
+require("util").lsp {
+    name = "jsonls",
+    mason = "json-lsp",
     cmd = { "vscode-json-language-server", "--stdio" },
     filetypes = { "json", "jsonc" },
 }
-vim.lsp.enable "jsonls"

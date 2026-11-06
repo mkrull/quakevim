@@ -8,67 +8,27 @@ return {
     },
 
     {
-        -- Main LSP Configuration
         "neovim/nvim-lspconfig",
         dependencies = {
-            -- Automatically install LSPs and related tools to stdpath for Neovim
-            -- Mason must be loaded before its dependents so we need to set it up here.
-            -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
             { "mason-org/mason.nvim", opts = {} },
-
-            -- Useful status updates for LSP.
             { "j-hui/fidget.nvim", opts = {} },
-
-            -- Allows extra capabilities provided by blink.cmp
             "saghen/blink.cmp",
         },
         config = function()
-            -- Brief aside: **What is LSP?**
-            --
-            -- LSP is an initialism you've probably heard, but might not understand what it is.
-            --
-            -- LSP stands for Language Server Protocol. It's a protocol that helps editors
-            -- and language tooling communicate in a standardized fashion.
-            --
-            -- In general, you have a "server" which is some tool built to understand a particular
-            -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-            -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-            -- processes that communicate with some "client" - in this case, Neovim!
-            --
-            -- LSP provides Neovim with features like:
-            --  - Go to definition
-            --  - Find references
-            --  - Autocompletion
-            --  - Symbol Search
-            --  - and more!
-            --
-            -- Thus, Language Servers are external tools that must be installed separately from
-            -- Neovim. This is where `mason` and related plugins come into play.
-            --
-            -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-            -- and elegantly composed help section, `:help lsp-vs-treesitter`
-
-            --  This function gets run when an LSP attaches to a particular buffer.
-            --    That is to say, every time a new file is opened that is associated with
-            --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-            --    function will be executed to configure the current buffer
             vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("cleanvim-lsp-attach", { clear = true }),
+                group = vim.api.nvim_create_augroup("quakevim-lsp-attach", { clear = true }),
                 callback = function(event)
-                    require("extensions.lsp.mappings").add_to_buffer(event.buf)
+                    require("extensions.lsp").add_to_buffer(event.buf)
 
-                    -- The following two autocommands are used to highlight references of the
-                    -- word under your cursor when your cursor rests there for a little while.
-                    --    See `:help CursorHold` for information about when this is executed
-                    --
-                    -- When you move your cursor, the highlights will be cleared (the second autocommand).
+                    -- highlight references of the word under the cursor while
+                    -- the cursor rests on it
                     local client = vim.lsp.get_client_by_id(event.data.client_id)
                     if
                         client
                         and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
                     then
                         local highlight_augroup =
-                            vim.api.nvim_create_augroup("cleanvim-lsp-highlight", { clear = false })
+                            vim.api.nvim_create_augroup("quakevim-lsp-highlight", { clear = false })
                         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
                             buffer = event.buf,
                             group = highlight_augroup,
@@ -82,18 +42,16 @@ return {
                         })
 
                         vim.api.nvim_create_autocmd("LspDetach", {
-                            group = vim.api.nvim_create_augroup("cleanvim-lsp-detach", { clear = true }),
+                            group = vim.api.nvim_create_augroup("quakevim-lsp-detach", { clear = true }),
                             callback = function(event2)
                                 vim.lsp.buf.clear_references()
-                                vim.api.nvim_clear_autocmds { group = "cleanvim-lsp-highlight", buffer = event2.buf }
+                                vim.api.nvim_clear_autocmds { group = "quakevim-lsp-highlight", buffer = event2.buf }
                             end,
                         })
                     end
                 end,
             })
 
-            -- Diagnostic Config
-            -- See :help vim.diagnostic.Opts
             vim.diagnostic.config {
                 severity_sort = true,
                 underline = true,

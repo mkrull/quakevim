@@ -1,9 +1,6 @@
-require("util").install "stylua"
-require("util").install "lua-language-server"
-
-local capabilities = require("blink.cmp").get_lsp_capabilities()
-vim.lsp.config.lua_ls = {
-    capabilities = capabilities,
+require("util").lsp {
+    name = "lua_ls",
+    mason = { "lua-language-server", "stylua" },
     cmd = { "lua-language-server" },
     filetypes = { "lua" },
     settings = {
@@ -11,9 +8,8 @@ vim.lsp.config.lua_ls = {
             completion = {
                 callSnippet = "Replace",
             },
-            -- Ignore Lua_LS's noisy `missing-fields` warnings
+            -- ignore lua_ls's noisy `missing-fields` warnings
             diagnostics = { disable = { "missing-fields" } },
         },
     },
 }
-vim.lsp.enable "lua_ls"

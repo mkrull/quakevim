@@ -1,6 +1,5 @@
 require "core.options"
-require "core.linenumbers"
-require "core.save"
+require "core.autocmds"
 require "core.extensions"
 
 local loader = require "core.loader"
@@ -46,7 +45,8 @@ vim.cmd [[nnoremap q <Nop>]]
 
 -- those packages depend on lazy installed plugins, e.g. which-key and
 -- colorschemes
-require("core.colors").use(config.colorscheme)
+require "core.colors"
+vim.cmd.colorscheme(config.colorscheme or "default")
 require "core.mappings"
 
 -- loading configured extensions

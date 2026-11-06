@@ -50,12 +50,15 @@ function M.load_specs(spec)
     end
     M.plugins = config_cache.extensions or {}
     for _, value in ipairs(M.plugins) do
-        local spec_path = vim.fn.stdpath "config" .. "/lua/extensions/" .. value .. "/spec.lua"
-        if vim.fn.filereadable(spec_path) == 1 then
-            table.insert(spec, { import = "extensions." .. value:gsub("/", ".") .. ".spec" })
-        else
+        local ext_dir = vim.fn.stdpath "config" .. "/lua/extensions/" .. value
+        local spec_path = ext_dir .. "/spec.lua"
+        if vim.fn.isdirectory(ext_dir) == 0 then
             notify_error("unknown extension " .. vim.inspect(value) .. " in extensions.lua")
+        elseif vim.fn.filereadable(spec_path) == 1 then
+            table.insert(spec, { import = "extensions." .. value:gsub("/", ".") .. ".spec" })
         end
+        -- extensions without a spec.lua only provide setup code in init.lua,
+        -- nothing to import for lazy.nvim
     end
     return spec
 end

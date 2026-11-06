@@ -102,13 +102,15 @@ extensions is installed.
 ## Extensions
 
 Extensions are essentially plugins with somewhat standardized extra
-configuration. Each extension has a `spec.lua` file that is used to install and
-manage plugins via [lazy.nvim](https://github.com/folke/lazy.nvim).
+configuration. Each extension has an `init.lua` with setup code and mappings
+and can have a `spec.lua` that is used to install and manage plugins via
+[lazy.nvim](https://github.com/folke/lazy.nvim).
 
 They are enabled and disabled in the neovim config dir's top level
 `extensions.lua`.
 
-`:MakeExtension lang/gleam` will create a new directory containing a
-`spec.lua`, an `init.lua`, and a `mappings.lua`. The extension gets
+`:MakeExtension lang/gleam` will create a new directory containing an
+`init.lua` for setup and mappings and a `spec.lua` for plugins managed via
+[lazy.nvim](https://github.com/folke/lazy.nvim). The extension gets
 automatically installed and required at startup once it is listed in the top
 level `extensions.lua` file.

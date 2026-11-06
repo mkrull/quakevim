@@ -1,17 +1,8 @@
-require "extensions.lang.go.lint"
+require("util").ts_install { "go", "gomod", "gowork" }
 
--- vim-go used to provide Go syntax highlighting; install the parsers for the
--- native treesitter setup instead
-local ok, ts = pcall(require, "nvim-treesitter")
-if ok then
-    ts.install { "go", "gomod", "gowork" }
-end
-
-require("util").install "gopls"
-
-local capabilities = require("blink.cmp").get_lsp_capabilities()
-vim.lsp.config.gopls = {
-    capabilities = capabilities,
+require("util").lsp {
+    name = "gopls",
+    mason = "gopls",
     cmd = { "gopls" },
     filetypes = { "go", "gomod", "gowork", "gotmpl" },
     settings = {
@@ -28,14 +19,35 @@ vim.lsp.config.gopls = {
         },
     },
 }
-vim.lsp.enable "gopls"
 
+-- lint with revive on save, picking up ~/.config/revive.toml when present
+local revive_configured = false
+
+local lint = function()
+    local ok, linter = pcall(require, "lint")
+    if not ok then
+        return
+    end
+
+    if not revive_configured then
+        revive_configured = true
+        local config_file = vim.fn.expand "~/.config/revive.toml"
+        if vim.fn.filereadable(config_file) == 1 then
+            table.insert(linter.linters.revive.args, "-config")
+            table.insert(linter.linters.revive.args, config_file)
+        end
+        linter.linters_by_ft.go = { "revive" }
+    end
+
+    linter.try_lint()
+end
+
+-- organize imports on save before formatting, gofmt alone does not do it
 local function go_formatter()
     local params = vim.lsp.util.make_range_params(0, "utf-8")
     params.context = { only = { "source.organizeImports" } }
 
-    local method = "textDocument/codeAction"
-    local resp = vim.lsp.buf_request_sync(0, method, params, 1000)
+    local resp = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
 
     for _, res in pairs(resp or {}) do
         for _, r in pairs(res.result or {}) do
@@ -47,14 +59,16 @@ local function go_formatter()
         end
     end
 
-    if vim.lsp.buf.format then
-        vim.lsp.buf.format()
-    elseif vim.lsp.buf.formatting then
-        vim.lsp.buf.formatting()
-    end
+    vim.lsp.buf.format()
 end
 
 local gogroup = vim.api.nvim_create_augroup("GoBufferMappings", { clear = true })
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = "*.go",
+    group = gogroup,
+    callback = lint,
+})
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "format buffer before saving",

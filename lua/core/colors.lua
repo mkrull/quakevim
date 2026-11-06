@@ -1,5 +1,3 @@
-local M = {}
-
 -- keep the FloatBorder background in sync with the NormalFloat background so
 -- that borders blend into floating windows instead of showing the editor
 -- background around them
@@ -26,16 +24,3 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     group = vim.api.nvim_create_augroup("quakevim-float-border", { clear = true }),
     callback = sync_float_border,
 })
-
-M.loaded = "default"
-
-M.use = function(scheme)
-    if scheme then
-        vim.cmd.colorscheme(scheme)
-        return
-    end
-
-    vim.cmd.colorscheme(M.loaded)
-end
-
-return M

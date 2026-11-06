@@ -1,17 +1,11 @@
-require("util").install "yaml-language-server"
-
-local capabilities = require("blink.cmp").get_lsp_capabilities()
-vim.lsp.config.yamlls = {
-    capabilities = capabilities,
+require("util").lsp {
+    name = "yamlls",
+    mason = "yaml-language-server",
     cmd = { "yaml-language-server", "--stdio" },
     filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
 }
-vim.lsp.enable "yamlls"
 
-local ok, ts = pcall(require, "nvim-treesitter")
-if ok then
-    ts.install { "yaml" }
-end
+require("util").ts_install { "yaml" }
 
 -- default to yamlfmt for autoformatting yaml if it is available
 if vim.fn.executable "yamlfmt" == 1 then

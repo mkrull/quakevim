@@ -59,4 +59,31 @@ M.install = function(name)
     end
 end
 
+-- install treesitter parsers, a no-op until nvim-treesitter is loaded
+M.ts_install = function(langs)
+    local ok, ts = pcall(require, "nvim-treesitter")
+    if ok then
+        ts.install(langs)
+    end
+end
+
+-- configure and enable an LSP server, wiring in blink.cmp capabilities;
+-- installs the given mason package(s) first if any
+M.lsp = function(opts)
+    if opts.mason then
+        local packages = type(opts.mason) == "table" and opts.mason or { opts.mason }
+        for _, pkg in ipairs(packages) do
+            M.install(pkg)
+        end
+    end
+
+    vim.lsp.config[opts.name] = {
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
+        cmd = opts.cmd,
+        filetypes = opts.filetypes,
+        settings = opts.settings,
+    }
+    vim.lsp.enable(opts.name)
+end
+
 return M

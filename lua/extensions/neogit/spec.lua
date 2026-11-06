@@ -25,7 +25,6 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         event = "BufReadPost",
-        config = true,
         opts = {
             current_line_blame_opts = {
                 delay = 100,
